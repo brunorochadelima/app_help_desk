@@ -1,14 +1,7 @@
 <?php
-//consulta se o usuário está autenticado
-session_start();
-
-// se não existir sessao ativa ou sessao e diferente de true redirecionar usuário
-if(!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'true') {
-  header('Location: index.php?login=erro2');
-}
-
-
+require_once 'validar_acesso.php';
 ?>
+
 <html>
 
 <head>
