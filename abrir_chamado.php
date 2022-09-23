@@ -45,15 +45,15 @@ require_once 'validar_acesso.php';
             <div class="row">
               <div class="col">
 
-                <form>
+                <form method="post" action="registra_chamado.php" >
                   <div class="form-group">
                     <label>Título</label>
-                    <input type="text" class="form-control" placeholder="Título">
+                    <input type="text" class="form-control" name="titulo" placeholder="Título">
                   </div>
 
                   <div class="form-group">
                     <label>Categoria</label>
-                    <select class="form-control">
+                    <select name="categoria" class="form-control" >
                       <option>Criação Usuário</option>
                       <option>Impressora</option>
                       <option>Hardware</option>
@@ -64,7 +64,7 @@ require_once 'validar_acesso.php';
 
                   <div class="form-group">
                     <label>Descrição</label>
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" rows="3" name="descricao"></textarea>
                   </div>
 
                   <div class="row mt-5">
