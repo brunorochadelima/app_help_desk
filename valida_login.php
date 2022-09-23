@@ -22,6 +22,7 @@ if ($usuarioEstaAtenticado) {
   /* superglobal que armazena variaveis de seções que podem ser recuperadas em todos as paginas.
   a sessao dura 3 horas e é controlada através de um cookie no navegador */
   $_SESSION ['autenticado'] = 'true';
+  header('Location: home.php');
 } else {
   header('Location: index.php?login=erro');
   $_SESSION ['autenticado'] = 'false';
