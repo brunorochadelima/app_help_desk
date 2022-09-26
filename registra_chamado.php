@@ -16,3 +16,4 @@ fwrite($arquivo, "$titulo # $categoria # $descricao" . PHP_EOL);
 
 // fechar o arquivo
 fclose($arquivo);
+header('Location: abrir_chamado.php');
