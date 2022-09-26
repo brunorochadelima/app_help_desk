@@ -1,4 +1,7 @@
 <?php 
+session_start();
+
+
 //capturar dados do form com Post
 echo '<pre>';
 print_r($_POST);
@@ -12,7 +15,7 @@ $descricao = str_replace('#', '-', $_POST['descricao']);
 $arquivo = fopen('arquivo.hd', 'a');
 
 // escrever no arquivo
-fwrite($arquivo, "$titulo # $categoria # $descricao" . PHP_EOL);
+fwrite($arquivo,$_SESSION['usuario_id'] . "# $titulo # $categoria # $descricao" . PHP_EOL);
 
 // fechar o arquivo
 fclose($arquivo);

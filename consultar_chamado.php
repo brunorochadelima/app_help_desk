@@ -1,5 +1,6 @@
 <?php
 require_once 'validar_acesso.php';
+
 ?>
 
 <?php
@@ -13,10 +14,6 @@ while (!feof($arquivo)) {
   $registro = fgets($arquivo);
   $chamados[] = $registro;
 }
-
-// echo '<pre>';
-// print_r($chamados);
-// echo '</pre>';
 
 //fecha o arquivo
 fclose($arquivo)
@@ -65,13 +62,20 @@ fclose($arquivo)
 
           <div class="card-body">
 
-
-
             <?php foreach ($chamados as $chamado) { ?>
-
               <?php
+
               // converter string em array usando o delimitador #
               $chamado_dados = explode('#', $chamado);
+
+              //  Verifica se o usuário pode ver chamados
+              if ($_SESSION['perfil_acesso'] == 2) {
+                // só exibir chamado se ele for criado pelo usuário
+                if ($_SESSION['usuario_id'] != $chamado_dados[0]) {
+                  continue;
+                };
+              }
+
               // se o chamado tiver menos de 3 itens pular para proximo
               if (count($chamado_dados) < 3) {
                 continue;
@@ -80,9 +84,9 @@ fclose($arquivo)
 
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><?= $chamado_dados[0] ?></h5>
-                  <h6 class="card-subtitle mb-2 text-muted"><?= $chamado_dados[1] ?></h6>
-                  <p class="card-text"><?= $chamado_dados[2] ?></p>
+                  <h5 class="card-title"><?= $chamado_dados[1] ?></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><?= $chamado_dados[2] ?></h6>
+                  <p class="card-text"><?= $chamado_dados[3] ?></p>
                 </div>
               </div>
 
