@@ -14,9 +14,9 @@ while (!feof($arquivo)) {
   $chamados[] = $registro;
 }
 
-echo '<pre>';
-print_r($chamados);
-echo '</pre>';
+// echo '<pre>';
+// print_r($chamados);
+// echo '</pre>';
 
 //fecha o arquivo
 fclose($arquivo)
