@@ -1,6 +1,5 @@
 <?php
 require_once 'validar_acesso.php';
-
 ?>
 
 <?php
@@ -12,7 +11,20 @@ $chamados = [];
 // loop enquanto houver registos no arquivo - testanto pelo fim do arquivo
 while (!feof($arquivo)) {
   $registro = fgets($arquivo);
-  $chamados[] = $registro;
+
+  // explode dos detalhes do registro para verificar o id do usuário responsável pelo cadastro
+  $registro_dados = explode('#', $registro);
+
+  //  Verifica se o usuário pode ver chamados
+  if ($_SESSION['perfil_acesso'] == 2) {
+    if ($_SESSION['usuario_id'] != $registro_dados[0]) {
+      continue;
+    } else {
+      $chamados[] = $registro; //adiciona o registro do arquivo ao array $chamados
+    }
+  } else {
+    $chamados[] = $registro; //adiciona o registro do arquivo ao array $chamados
+  }
 }
 
 //fecha o arquivo
@@ -67,14 +79,6 @@ fclose($arquivo)
 
               // converter string em array usando o delimitador #
               $chamado_dados = explode('#', $chamado);
-
-              //  Verifica se o usuário pode ver chamados
-              if ($_SESSION['perfil_acesso'] == 2) {
-                // só exibir chamado se ele for criado pelo usuário
-                if ($_SESSION['usuario_id'] != $chamado_dados[0]) {
-                  continue;
-                };
-              }
 
               // se o chamado tiver menos de 3 itens pular para proximo
               if (count($chamado_dados) < 3) {
